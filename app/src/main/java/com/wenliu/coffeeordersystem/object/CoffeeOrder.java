@@ -3,7 +3,7 @@ package com.wenliu.coffeeordersystem.object;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CofferOrder {
+public class CoffeeOrder {
 
     private String mAccount;
     private List<String> mContent;
@@ -13,7 +13,7 @@ public class CofferOrder {
     private String mTime;
 
 
-    public CofferOrder() {
+    public CoffeeOrder() {
         mAccount = "test@gmail.com";
         mContent = new ArrayList<>();
         mItemCount = -1;

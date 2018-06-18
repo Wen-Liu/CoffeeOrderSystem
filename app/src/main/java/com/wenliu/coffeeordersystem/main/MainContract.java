@@ -10,6 +10,8 @@ public interface MainContract {
 
     interface View extends BaseView<Presenter> {
         void showCoffeeItems(ArrayList<CoffeeItem> coffeeItems);
+
+        void showCoffeeOrders(ArrayList<CoffeeItem> coffeeItems);
     }
 
     interface Presenter extends BasePresenter {

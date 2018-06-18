@@ -10,6 +10,7 @@
         android:id="@+id/rv_main_coffee_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/Grey_200"
         android:elevation="4dp"></android.support.v7.widget.RecyclerView>
 
     <View
@@ -24,18 +25,17 @@
         android:id="@+id/rv_main_coffee_order"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingHorizontal="16dp"></android.support.v7.widget.RecyclerView>
+        android:layout_weight="1"></android.support.v7.widget.RecyclerView>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginVertical="8dp"
+        android:background="@color/Grey_400"
         android:gravity="center"
         android:text="Confirm"
+        android:textAllCaps="false"
         android:textColor="@color/White"
-        android:textSize="16sp"
-        android:background="@color/Grey_400"
-        android:layout_marginVertical="8dp"
-        android:textAllCaps="false" />
+        android:textSize="16sp" />
 
 </LinearLayout>
