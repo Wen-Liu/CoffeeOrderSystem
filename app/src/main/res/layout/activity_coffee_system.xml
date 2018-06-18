@@ -10,14 +10,16 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_coffee_order"
         android:layout_width="match_parent"
-        android:layout_height="80dp">
+        android:layout_height="60dp"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="AWS Cafe"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="24sp" />
 
     </android.support.v7.widget.Toolbar>
@@ -39,14 +41,14 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/Grey_200"
-            android:src="@drawable/ic_add_shopping_cart"/>
+            android:src="@drawable/ic_add_shopping_cart" />
 
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/ic_assignment"
-            android:background="@color/Grey_200"/>
+            android:background="@color/Grey_200"
+            android:src="@drawable/ic_assignment" />
 
     </LinearLayout>
 
