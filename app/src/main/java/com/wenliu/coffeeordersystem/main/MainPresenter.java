@@ -42,4 +42,8 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
 
+    @Override
+    public void addCoffeeOrder(CoffeeItem coffeeItem) {
+        mMainView.showCoffeeOrders(coffeeItem);
+    }
 }

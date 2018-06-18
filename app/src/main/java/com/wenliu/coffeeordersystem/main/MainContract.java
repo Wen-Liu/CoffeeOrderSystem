@@ -11,11 +11,12 @@ public interface MainContract {
     interface View extends BaseView<Presenter> {
         void showCoffeeItems(ArrayList<CoffeeItem> coffeeItems);
 
-        void showCoffeeOrders(ArrayList<CoffeeItem> coffeeItems);
+        void showCoffeeOrders(CoffeeItem coffeeItem);
     }
 
     interface Presenter extends BasePresenter {
 
+        void addCoffeeOrder(CoffeeItem coffeeItem);
     }
 
 }

@@ -20,7 +20,7 @@
             android:gravity="center"
             android:text="AWS Cafe"
             android:textColor="@android:color/white"
-            android:textSize="24sp" />
+            android:textSize="18sp" />
 
     </android.support.v7.widget.Toolbar>
 
@@ -37,6 +37,7 @@
         android:orientation="horizontal">
 
         <ImageButton
+            android:id="@+id/imagebtn_main"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -44,6 +45,7 @@
             android:src="@drawable/ic_add_shopping_cart" />
 
         <ImageButton
+            android:id="@+id/imagebtn_order_list"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

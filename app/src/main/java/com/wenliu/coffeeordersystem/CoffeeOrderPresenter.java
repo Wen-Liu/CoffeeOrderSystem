@@ -6,6 +6,8 @@ import android.util.Log;
 
 import com.wenliu.coffeeordersystem.main.MainFragment;
 import com.wenliu.coffeeordersystem.main.MainPresenter;
+import com.wenliu.coffeeordersystem.orderlist.OrderListFragment;
+import com.wenliu.coffeeordersystem.orderlist.OrderListPresenter;
 
 public class CoffeeOrderPresenter implements CoffeeOrderContract.Presenter {
 
@@ -13,11 +15,14 @@ public class CoffeeOrderPresenter implements CoffeeOrderContract.Presenter {
     private final FragmentManager mFragmentManager;
     private MainFragment mMainFragment;
     private MainPresenter mMainPresenter;
+    private OrderListFragment mOrderListFragment;
+    private OrderListPresenter mOrderListPresenter;
 
     public static final String MAIN = "MAIN";
-    public static final String DETAIL = "DETAIL";
+    public static final String ORDER_LIST = "ORDER_LIST";
 
     public CoffeeOrderPresenter(CoffeeOrderContract.View coffeeOrderView, FragmentManager fragmentManager) {
+        Log.d(Constants.TAG_COFFEE_ORDER_PRESENTER, "CoffeeOrderPresenter: ");
         mCoffeeOrderView = coffeeOrderView;
         mFragmentManager = fragmentManager;
     }
@@ -48,6 +53,25 @@ public class CoffeeOrderPresenter implements CoffeeOrderContract.Presenter {
 
     @Override
     public void transToOrderList() {
+
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+
+        if (mMainFragment != null && !mMainFragment.isHidden()) {
+            transaction.hide(mMainFragment);
+            transaction.addToBackStack(MAIN);
+        }
+
+        if (mOrderListFragment == null) mOrderListFragment = OrderListFragment.newInstance();
+        if (!mOrderListFragment.isAdded()) {
+            transaction.add(R.id.frame_container_coffee_activity, mOrderListFragment, ORDER_LIST);
+        } else {
+            transaction.show(mOrderListFragment);
+        }
+        transaction.commit();
+
+        if (mOrderListPresenter == null) {
+            mOrderListPresenter = new OrderListPresenter(mOrderListFragment);
+        }
 
     }
 

@@ -12,17 +12,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.wenliu.coffeeordersystem.CoffeeOrderSystem;
+import com.wenliu.coffeeordersystem.CoffeeOrder;
 import com.wenliu.coffeeordersystem.Constants;
 import com.wenliu.coffeeordersystem.R;
 import com.wenliu.coffeeordersystem.object.CoffeeItem;
-import com.wenliu.coffeeordersystem.object.CoffeeOrder;
+import com.wenliu.coffeeordersystem.object.CoffeeType;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -35,12 +37,15 @@ public class MainFragment extends Fragment implements MainContract.View {
     @BindView(R.id.rv_main_coffee_order)
     RecyclerView mRvMainCoffeeOrder;
     Unbinder unbinder;
+    @BindView(R.id.tv_main_confirm)
+    TextView mTvMainConfirm;
 
     private MainContract.Presenter mPresenter;
     private MainCoffeeItemAdapter mMainCoffeeItemAdapter;
     private MainCoffeeOrderAdapter mMainCoffeeOrderAdapter;
     private ArrayList<CoffeeItem> mCoffeeItems = new ArrayList<>();
-    private ArrayList<CoffeeOrder> mCoffeeOrders = new ArrayList<>();
+    private ArrayList<CoffeeType> mCoffeeTypes = new ArrayList<>();
+    private com.wenliu.coffeeordersystem.object.CoffeeOrder mCoffeeOrder;
 
     public MainFragment() {
         // Required empty public constructor
@@ -70,11 +75,11 @@ public class MainFragment extends Fragment implements MainContract.View {
 //        int spacing = Math.round(4 * getResources().getDisplayMetrics().density); // 50p
 //        boolean includeEdge = false;
 //        mRvMainCoffeeItem.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
-        mRvMainCoffeeItem.setLayoutManager(new GridLayoutManager(CoffeeOrderSystem.getAppContext(), 4));
+        mRvMainCoffeeItem.setLayoutManager(new GridLayoutManager(CoffeeOrder.getAppContext(), 4));
         mRvMainCoffeeItem.setAdapter(mMainCoffeeItemAdapter);
 
-        mMainCoffeeOrderAdapter = new MainCoffeeOrderAdapter(getContext(), mPresenter, mCoffeeOrders);
-        mRvMainCoffeeOrder.setLayoutManager(new LinearLayoutManager(CoffeeOrderSystem.getAppContext()));
+        mMainCoffeeOrderAdapter = new MainCoffeeOrderAdapter(getContext(), mPresenter, mCoffeeTypes);
+        mRvMainCoffeeOrder.setLayoutManager(new LinearLayoutManager(CoffeeOrder.getAppContext()));
         mRvMainCoffeeOrder.setAdapter(mMainCoffeeOrderAdapter);
     }
 
@@ -102,7 +107,15 @@ public class MainFragment extends Fragment implements MainContract.View {
     }
 
     @Override
-    public void showCoffeeOrders(ArrayList<CoffeeItem> coffeeItems) {
+    public void showCoffeeOrders(CoffeeItem coffeeItem) {
         Log.d(Constants.TAG_MAIN_FRAGMENT, "showCoffeeOrders: ");
+        mCoffeeTypes.add(new CoffeeType(coffeeItem));
+        mMainCoffeeOrderAdapter.updateData(mCoffeeTypes);
+    }
+
+    @OnClick(R.id.tv_main_confirm)
+    public void onViewClicked() {
+        mCoffeeOrder = mMainCoffeeOrderAdapter.getOrderData();
+        int i =0;
     }
 }

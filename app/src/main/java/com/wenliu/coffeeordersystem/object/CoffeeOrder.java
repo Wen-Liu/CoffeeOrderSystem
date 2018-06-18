@@ -6,7 +6,7 @@ import java.util.List;
 public class CoffeeOrder {
 
     private String mAccount;
-    private List<String> mContent;
+    private List<CoffeeType> mContent;
     private int mItemCount;
     private int mPrice;
     private int mStatus;
@@ -31,11 +31,11 @@ public class CoffeeOrder {
         mAccount = account;
     }
 
-    public List<String> getContent() {
+    public List<CoffeeType> getContent() {
         return mContent;
     }
 
-    public void setContent(List<String> content) {
+    public void setContent(List<CoffeeType> content) {
         mContent = content;
     }
 

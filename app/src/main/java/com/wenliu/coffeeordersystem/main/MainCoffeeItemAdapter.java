@@ -11,9 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
-import com.wenliu.coffeeordersystem.CoffeeOrderSystem;
 import com.wenliu.coffeeordersystem.Constants;
 import com.wenliu.coffeeordersystem.R;
 import com.wenliu.coffeeordersystem.object.CoffeeItem;
@@ -49,11 +46,7 @@ public class MainCoffeeItemAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Glide.with(mContext)
                 .load(mCoffeeItems.get(position).getImage())
-                .apply(RequestOptions
-                        .circleCropTransform()
-                        .diskCacheStrategy(DiskCacheStrategy.ALL))
                 .into(((CoffeeItemViewHolder) holder).getIbtnAdapterCoffeeItem());
-//        mImageManager.loadImageUrl(mBookCustomInfos.get(position).getImage(), ((MainViewHolder) holder).getImVMainBookCover());
     }
 
     @Override
@@ -74,8 +67,8 @@ public class MainCoffeeItemAdapter extends RecyclerView.Adapter {
         public void onViewClicked(View view) {
             switch (view.getId()) {
                 case R.id.ibtn_adapter_coffee_item:
-                    Log.d(Constants.TAG_MAIN_COFFEE_ITEM_ADAPTER, "TAG_MAIN_COFFEE_ITEM_ADAPTER Clicked position: " + getAdapterPosition());
 
+                    mPresenter.addCoffeeOrder(mCoffeeItems.get(getAdapterPosition()));
                     break;
             }
         }

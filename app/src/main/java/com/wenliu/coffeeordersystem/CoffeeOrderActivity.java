@@ -4,17 +4,22 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-
-import com.wenliu.coffeeordersystem.main.MainContract;
+import android.view.View;
+import android.widget.ImageButton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class CoffeeOrderActivity extends AppCompatActivity implements CoffeeOrderContract.View {
 
 
     @BindView(R.id.toolbar_coffee_order)
     Toolbar mToolbarCoffeeOrder;
+    @BindView(R.id.imagebtn_main)
+    ImageButton mImagebtnMain;
+    @BindView(R.id.imagebtn_order_list)
+    ImageButton mImagebtnOrderList;
 
     private CoffeeOrderContract.Presenter mPresenter;
 
@@ -56,5 +61,20 @@ public class CoffeeOrderActivity extends AppCompatActivity implements CoffeeOrde
     @Override
     public void setPresenter(CoffeeOrderContract.Presenter presenter) {
         mPresenter = presenter;
+    }
+
+    @OnClick({R.id.imagebtn_main, R.id.imagebtn_order_list})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.imagebtn_main:
+                Log.d(Constants.TAG_COFFEE_ORDER_ACTIVITY, "onViewClicked: imagebtn_main ");
+                mPresenter.transToMain();
+                break;
+
+            case R.id.imagebtn_order_list:
+                Log.d(Constants.TAG_COFFEE_ORDER_ACTIVITY, "onViewClicked: imagebtn_order_list ");
+                mPresenter.transToOrderList();
+                break;
+        }
     }
 }

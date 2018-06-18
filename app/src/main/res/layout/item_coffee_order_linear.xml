@@ -4,13 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="8dp">
+    android:paddingVertical="8dp"
+    android:paddingHorizontal="16dp">
 
     <ImageView
-        android:id="@+id/iv_main_book_cover"
+        android:id="@+id/iv_adapter_order_coffee_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:scaleType="fitCenter"
+        android:scaleType="fitXY"
         app:srcCompat="@android:color/darker_gray" />
 
     <LinearLayout
@@ -96,7 +97,7 @@
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/radioBtn_unread"
+                    android:id="@+id/radioBtn_sugar"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -105,7 +106,7 @@
                     android:typeface="sans" />
 
                 <RadioButton
-                    android:id="@+id/radioBtn_reading"
+                    android:id="@+id/radioBtn_no_sugar"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

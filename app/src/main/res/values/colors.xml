@@ -12,6 +12,7 @@
     <color name="Black">#000000</color>
 
     <!-- Grey Series-->
+    <color name="Grey_50">#fafafa</color>
     <color name="Grey_200">#eeeeee</color>
     <color name="Grey_400">#bdbdbd</color>
     <color name="Grey_500">#9e9e9e</color>
