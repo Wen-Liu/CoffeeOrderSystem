@@ -79,7 +79,7 @@ public class FirebaseApiHelper {
         Log.d(Constants.TAG_FIREBASE_API_HELPER, "getLatestOrderNumber: ");
 
         Query coffeeOrderQuery = mGetRef.child(Constants.FIREBASE_NODE_ORDERS).orderByKey().limitToLast(1);
-        
+
         coffeeOrderQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
