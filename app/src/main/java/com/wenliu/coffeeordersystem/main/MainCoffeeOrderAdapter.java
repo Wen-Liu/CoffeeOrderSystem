@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.wenliu.coffeeordersystem.Constants;
 import com.wenliu.coffeeordersystem.R;
+import com.wenliu.coffeeordersystem.UserManager;
 import com.wenliu.coffeeordersystem.object.CoffeeOrder;
 import com.wenliu.coffeeordersystem.object.CoffeeType;
 
@@ -128,7 +129,21 @@ public class MainCoffeeOrderAdapter extends RecyclerView.Adapter {
     public CoffeeOrder getOrderData() {
         CoffeeOrder coffeeOrder = new CoffeeOrder();
         coffeeOrder.setContent(mCoffeeTypes);
+        coffeeOrder.setAccount(UserManager.getInstance().getUserEmail());
+        coffeeOrder.setItemCount(mCoffeeTypes.size());
+        coffeeOrder.setPrice(countTotalPrice(mCoffeeTypes));
+        coffeeOrder.setStatus(Constants.FIREBASE_STATUS_PROCESS);
+        coffeeOrder.setTime(System.currentTimeMillis());
+
         return coffeeOrder;
+    }
+
+    private int countTotalPrice(ArrayList<CoffeeType> coffeeTypes) {
+        int totalPrice = 0;
+        for (int i = 0; i < coffeeTypes.size(); i++) {
+            totalPrice += coffeeTypes.get(i).getPrice();
+        }
+        return totalPrice;
     }
 
     public void updateData(ArrayList<CoffeeType> coffeeTypes) {

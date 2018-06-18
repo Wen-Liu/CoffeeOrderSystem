@@ -5,27 +5,33 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wenliu.coffeeordersystem.Constants;
+import com.wenliu.coffeeordersystem.CoffeeOrderSystem;
 import com.wenliu.coffeeordersystem.R;
-import com.wenliu.coffeeordersystem.object.CoffeeType;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class OrderListFragment extends Fragment implements OrderListContract.View {
 
-    private OrderListContract.Presenter mPresenter;
+    @BindView(R.id.rv_coffee_order_list)
+    RecyclerView mRvCoffeeOrderList;
+    Unbinder unbinder;
 
+    private OrderListContract.Presenter mPresenter;
+    private OrderListAdapter mOrderListAdapter;
+    private ArrayList<CoffeeOrderSystem> mCoffeeOrders;
 
 
     public OrderListFragment() {
@@ -42,11 +48,15 @@ public class OrderListFragment extends Fragment implements OrderListContract.Vie
         // Inflate the layout for this fragment
 
         View layout = inflater.inflate(R.layout.fragment_order_list, container, false);
+        unbinder = ButterKnife.bind(this, layout);
         setRecyclerView();
         return layout;
     }
 
     private void setRecyclerView() {
+        mOrderListAdapter = new OrderListAdapter(getContext(), mPresenter);
+        mRvCoffeeOrderList.setLayoutManager(new LinearLayoutManager(CoffeeOrderSystem.getAppContext()));
+        mRvCoffeeOrderList.setAdapter(mOrderListAdapter);
 
     }
 
@@ -57,10 +67,14 @@ public class OrderListFragment extends Fragment implements OrderListContract.Vie
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    @Override
     public void setPresenter(OrderListContract.Presenter presenter) {
         mPresenter = presenter;
     }
-
-
 
 }

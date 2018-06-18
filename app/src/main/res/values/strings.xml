@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">CoffeeOrderSystem</string>
+    <string name="app_name">Wen CoffeeOrderSystem</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Date Format -->
+    <string name="all_date_format">yyyyMMdd</string>
+
 </resources>

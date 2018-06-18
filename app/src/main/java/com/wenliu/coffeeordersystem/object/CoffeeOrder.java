@@ -10,7 +10,7 @@ public class CoffeeOrder {
     private int mItemCount;
     private int mPrice;
     private int mStatus;
-    private String mTime;
+    private long mTime;
 
 
     public CoffeeOrder() {
@@ -19,7 +19,7 @@ public class CoffeeOrder {
         mItemCount = -1;
         mPrice = -1;
         mStatus = -1;
-        mTime = "";
+        mTime = -1;
     }
 
 
@@ -63,11 +63,11 @@ public class CoffeeOrder {
         mStatus = status;
     }
 
-    public String getTime() {
+    public long getTime() {
         return mTime;
     }
 
-    public void setTime(String time) {
+    public void setTime(long time) {
         mTime = time;
     }
 }

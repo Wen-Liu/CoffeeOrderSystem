@@ -3,7 +3,7 @@ package com.wenliu.coffeeordersystem;
 import android.app.Application;
 import android.content.Context;
 
-public class CoffeeOrder extends Application {
+public class CoffeeOrderSystem extends Application {
 
     private static Context mContext;
 

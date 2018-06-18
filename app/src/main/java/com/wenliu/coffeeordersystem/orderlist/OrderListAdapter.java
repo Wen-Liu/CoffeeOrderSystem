@@ -2,6 +2,7 @@ package com.wenliu.coffeeordersystem.orderlist;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,7 +13,6 @@ import android.widget.TextView;
 import com.wenliu.coffeeordersystem.Constants;
 import com.wenliu.coffeeordersystem.R;
 import com.wenliu.coffeeordersystem.object.CoffeeOrder;
-import com.wenliu.coffeeordersystem.object.CoffeeType;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,10 +26,11 @@ public class OrderListAdapter extends RecyclerView.Adapter {
     private OrderListContract.Presenter mPresenter;
     private ArrayList<CoffeeOrder> mCoffeeOrders;
 
-    public OrderListAdapter(Context context, OrderListContract.Presenter presenter, ArrayList<CoffeeOrder> coffeeOrders) {
+    public OrderListAdapter(Context context, OrderListContract.Presenter presenter) {
+
         mContext = context;
         mPresenter = presenter;
-        mCoffeeOrders = coffeeOrders;
+//        mCoffeeOrders = coffeeOrders;
     }
 
     @NonNull
@@ -44,11 +45,15 @@ public class OrderListAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
+        if(position%2==0){
+            ((OrderListViewHolder)holder).getConsLayoutOrderList().setBackgroundColor(mContext.getColor(R.color.Grey_200));
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return 15;
     }
 
 
@@ -66,12 +71,17 @@ public class OrderListAdapter extends RecyclerView.Adapter {
         TextView mTvOrderItems;
         @BindView(R.id.tv_total_price)
         TextView mTvTotalPrice;
-
+        @BindView(R.id.consLayout_order_list)
+        ConstraintLayout mConsLayoutOrderList;
         //endregion
 
         public OrderListViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+        }
+
+        public ConstraintLayout getConsLayoutOrderList() {
+            return mConsLayoutOrderList;
         }
 
         public TextView getTvOrderStatus() {

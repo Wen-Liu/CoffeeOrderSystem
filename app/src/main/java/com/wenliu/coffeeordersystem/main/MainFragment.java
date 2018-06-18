@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.wenliu.coffeeordersystem.CoffeeOrder;
+import com.wenliu.coffeeordersystem.CoffeeOrderSystem;
 import com.wenliu.coffeeordersystem.Constants;
 import com.wenliu.coffeeordersystem.R;
 import com.wenliu.coffeeordersystem.object.CoffeeItem;
@@ -75,11 +75,11 @@ public class MainFragment extends Fragment implements MainContract.View {
 //        int spacing = Math.round(4 * getResources().getDisplayMetrics().density); // 50p
 //        boolean includeEdge = false;
 //        mRvMainCoffeeItem.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
-        mRvMainCoffeeItem.setLayoutManager(new GridLayoutManager(CoffeeOrder.getAppContext(), 4));
+        mRvMainCoffeeItem.setLayoutManager(new GridLayoutManager(CoffeeOrderSystem.getAppContext(), 4));
         mRvMainCoffeeItem.setAdapter(mMainCoffeeItemAdapter);
 
         mMainCoffeeOrderAdapter = new MainCoffeeOrderAdapter(getContext(), mPresenter, mCoffeeTypes);
-        mRvMainCoffeeOrder.setLayoutManager(new LinearLayoutManager(CoffeeOrder.getAppContext()));
+        mRvMainCoffeeOrder.setLayoutManager(new LinearLayoutManager(CoffeeOrderSystem.getAppContext()));
         mRvMainCoffeeOrder.setAdapter(mMainCoffeeOrderAdapter);
     }
 
@@ -116,6 +116,7 @@ public class MainFragment extends Fragment implements MainContract.View {
     @OnClick(R.id.tv_main_confirm)
     public void onViewClicked() {
         mCoffeeOrder = mMainCoffeeOrderAdapter.getOrderData();
-        int i =0;
+        mPresenter.uploadOrderData(mCoffeeOrder);
+
     }
 }

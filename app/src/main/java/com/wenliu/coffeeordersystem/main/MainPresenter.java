@@ -6,6 +6,7 @@ import com.wenliu.coffeeordersystem.Constants;
 import com.wenliu.coffeeordersystem.api.FirebaseApiHelper;
 import com.wenliu.coffeeordersystem.api.GetCoffeeItemCallback;
 import com.wenliu.coffeeordersystem.object.CoffeeItem;
+import com.wenliu.coffeeordersystem.object.CoffeeOrder;
 
 import java.util.ArrayList;
 
@@ -45,5 +46,10 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void addCoffeeOrder(CoffeeItem coffeeItem) {
         mMainView.showCoffeeOrders(coffeeItem);
+    }
+
+    @Override
+    public void uploadOrderData(CoffeeOrder coffeeOrder) {
+        FirebaseApiHelper.getInstance().uploadOrderData(coffeeOrder);
     }
 }
