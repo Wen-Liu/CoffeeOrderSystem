@@ -22,7 +22,7 @@ public class Utils {
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(time);
-        String date = DateFormat.format("yyyy.M.dd, hh:mm:ss ", calendar).toString();
+        String date = DateFormat.format("yyyy.M.dd, HH:mm:ss ", calendar).toString();
 
         return date;
     }
