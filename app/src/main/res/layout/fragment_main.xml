@@ -1,14 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".main.MainFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_main_coffee_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"></android.support.v7.widget.RecyclerView>
+
+    <View
+        android:id="@+id/divide_line_maib"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:background="@color/Grey_400" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_main_coffee_order"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingHorizontal="16dp"></android.support.v7.widget.RecyclerView>
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="Confirm"
+        android:textColor="@color/White"
+        android:textSize="16sp"
+        android:background="@color/Grey_400"
+        android:layout_marginVertical="8dp"
+        android:textAllCaps="false" />
 
-</FrameLayout>
+</LinearLayout>
