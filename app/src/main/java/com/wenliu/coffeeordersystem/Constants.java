@@ -20,8 +20,8 @@ public class Constants {
     // Firebase
     public static final String FIREBASE_NODE_ITEMS = "items";
     public static final String FIREBASE_NODE_ORDERS = "orders";
-    public static final int FIREBASE_STATUS_PROCESS = 0;
-    public static final int FIREBASE_STATUS_COMPLETE = 1;
-    public static final int FIREBASE_STATUS_CANCEL = 2;
+    public static final int STATUS_PROCESS = 0;
+    public static final int STATUS_COMPLETE = 1;
+    public static final int STATUS_CANCEL = 2;
 
 }

@@ -6,7 +6,7 @@ import java.util.Calendar;
 
 public class Utils {
 
-    public static String getCreatedTime(long time) {
+    public static String getCreatedTimeTw(long time) {
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(time);
@@ -17,4 +17,15 @@ public class Utils {
 
         return dateTw;
     }
+
+    public static String getCreatedTime(long time) {
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(time);
+        String date = DateFormat.format("yyyy.M.dd, hh:mm:ss ", calendar).toString();
+
+        return date;
+    }
+
+
 }

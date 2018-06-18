@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.wenliu.coffeeordersystem.CoffeeOrderSystem;
 import com.wenliu.coffeeordersystem.R;
+import com.wenliu.coffeeordersystem.object.CoffeeOrder;
 
 import java.util.ArrayList;
 
@@ -31,7 +32,7 @@ public class OrderListFragment extends Fragment implements OrderListContract.Vie
 
     private OrderListContract.Presenter mPresenter;
     private OrderListAdapter mOrderListAdapter;
-    private ArrayList<CoffeeOrderSystem> mCoffeeOrders;
+    private ArrayList<CoffeeOrder> mCoffeeOrders = new ArrayList<>();
 
 
     public OrderListFragment() {
@@ -54,7 +55,7 @@ public class OrderListFragment extends Fragment implements OrderListContract.Vie
     }
 
     private void setRecyclerView() {
-        mOrderListAdapter = new OrderListAdapter(getContext(), mPresenter);
+        mOrderListAdapter = new OrderListAdapter(getContext(), mPresenter, mCoffeeOrders);
         mRvCoffeeOrderList.setLayoutManager(new LinearLayoutManager(CoffeeOrderSystem.getAppContext()));
         mRvCoffeeOrderList.setAdapter(mOrderListAdapter);
 
@@ -77,4 +78,8 @@ public class OrderListFragment extends Fragment implements OrderListContract.Vie
         mPresenter = presenter;
     }
 
+    @Override
+    public void showCoffeeOrders(ArrayList<CoffeeOrder> coffeeOrders) {
+        mOrderListAdapter.updateData(coffeeOrders);
+    }
 }

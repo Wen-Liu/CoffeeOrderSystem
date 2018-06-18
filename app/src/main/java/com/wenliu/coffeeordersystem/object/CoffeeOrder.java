@@ -5,6 +5,7 @@ import java.util.List;
 
 public class CoffeeOrder {
 
+    private String mOrderNumber;
     private String mAccount;
     private List<CoffeeType> mContent;
     private int mItemCount;
@@ -14,6 +15,7 @@ public class CoffeeOrder {
 
 
     public CoffeeOrder() {
+        mOrderNumber = "";
         mAccount = "test@gmail.com";
         mContent = new ArrayList<>();
         mItemCount = -1;
@@ -22,6 +24,13 @@ public class CoffeeOrder {
         mTime = -1;
     }
 
+    public String getOrderNumber() {
+        return mOrderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        mOrderNumber = orderNumber;
+    }
 
     public String getAccount() {
         return mAccount;

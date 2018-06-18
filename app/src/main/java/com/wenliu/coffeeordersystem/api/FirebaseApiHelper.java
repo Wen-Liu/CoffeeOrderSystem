@@ -60,7 +60,7 @@ public class FirebaseApiHelper {
     public void uploadOrderData(final CoffeeOrder coffeeOrder) {
         Log.d(Constants.TAG_FIREBASE_API_HELPER, "uploadOrderData: ");
 
-        String orderNumber = createOrderNumber(Utils.getCreatedTime(coffeeOrder.getTime()) + "001", new CreateOrderNumberCallback() {
+        createOrderNumber(Utils.getCreatedTimeTw(coffeeOrder.getTime()) + "001", new CreateOrderNumberCallback() {
             @Override
             public void onCompleted(String orderNumber) {
                 mGetRef.child(Constants.FIREBASE_NODE_ORDERS).child(orderNumber).setValue(coffeeOrder);
@@ -74,8 +74,7 @@ public class FirebaseApiHelper {
     }
 
 
-
-    private String createOrderNumber(final String time, final CreateOrderNumberCallback callback) {
+    private void createOrderNumber(final String time, final CreateOrderNumberCallback callback) {
         Log.d(Constants.TAG_FIREBASE_API_HELPER, "getLatestOrderNumber: ");
 
         Query coffeeOrderQuery = mGetRef.child(Constants.FIREBASE_NODE_ORDERS).orderByKey().limitToLast(1);
@@ -91,7 +90,7 @@ public class FirebaseApiHelper {
 
                         if (Integer.valueOf(latestOrderNumber) >= Integer.valueOf(time)) {
                             int orderNumber = Integer.valueOf(latestOrderNumber) + 1;
-                            orderNumberString =  String.valueOf(orderNumber);
+                            orderNumberString = String.valueOf(orderNumber);
                         } else {
                             orderNumberString = String.valueOf(time);
                         }
@@ -105,6 +104,32 @@ public class FirebaseApiHelper {
 
             }
         });
-        return time;
+    }
+
+
+    public void getOrderList(final GetOrderDataCallback callback) {
+        Log.d(Constants.TAG_FIREBASE_API_HELPER, "getOrderList: ");
+
+        final Query coffeeOrderQuery = mGetRef.child(Constants.FIREBASE_NODE_ORDERS).orderByKey().startAt("1070618001");
+        coffeeOrderQuery.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                ArrayList<CoffeeOrder> coffeeOrders = new ArrayList<>();
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        CoffeeOrder coffeeOrder = snapshot.getValue(CoffeeOrder.class);
+                        coffeeOrder.setOrderNumber(snapshot.getKey());
+                        coffeeOrders.add(coffeeOrder);
+                    }
+                    callback.onCompleted(coffeeOrders);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

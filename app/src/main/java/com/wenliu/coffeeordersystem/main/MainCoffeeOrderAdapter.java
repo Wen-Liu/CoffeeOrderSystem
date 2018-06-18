@@ -132,7 +132,7 @@ public class MainCoffeeOrderAdapter extends RecyclerView.Adapter {
         coffeeOrder.setAccount(UserManager.getInstance().getUserEmail());
         coffeeOrder.setItemCount(mCoffeeTypes.size());
         coffeeOrder.setPrice(countTotalPrice(mCoffeeTypes));
-        coffeeOrder.setStatus(Constants.FIREBASE_STATUS_PROCESS);
+        coffeeOrder.setStatus(Constants.STATUS_PROCESS);
         coffeeOrder.setTime(System.currentTimeMillis());
 
         return coffeeOrder;

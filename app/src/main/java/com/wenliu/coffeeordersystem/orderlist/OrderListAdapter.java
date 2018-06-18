@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.wenliu.coffeeordersystem.Constants;
 import com.wenliu.coffeeordersystem.R;
+import com.wenliu.coffeeordersystem.Utils;
 import com.wenliu.coffeeordersystem.object.CoffeeOrder;
 
 import java.util.ArrayList;
@@ -26,20 +27,17 @@ public class OrderListAdapter extends RecyclerView.Adapter {
     private OrderListContract.Presenter mPresenter;
     private ArrayList<CoffeeOrder> mCoffeeOrders;
 
-    public OrderListAdapter(Context context, OrderListContract.Presenter presenter) {
-
+    public OrderListAdapter(Context context, OrderListContract.Presenter presenter, ArrayList<CoffeeOrder> coffeeOrders) {
         mContext = context;
         mPresenter = presenter;
-//        mCoffeeOrders = coffeeOrders;
+        mCoffeeOrders = coffeeOrders;
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order_list_linear, parent, false);
         return new OrderListViewHolder(view);
-
     }
 
     @Override
@@ -47,13 +45,46 @@ public class OrderListAdapter extends RecyclerView.Adapter {
 
         if(position%2==0){
             ((OrderListViewHolder)holder).getConsLayoutOrderList().setBackgroundColor(mContext.getColor(R.color.Grey_200));
+            ((OrderListViewHolder)holder).getTvOrderStatus().setBackgroundColor(mContext.getColor(R.color.Grey_50));
+        } else {
+            ((OrderListViewHolder)holder).getTvOrderStatus().setBackgroundColor(mContext.getColor(R.color.Grey_200));
         }
 
+
+        ((OrderListViewHolder)holder).getTvOrderNumber().setText(mCoffeeOrders.get(position).getOrderNumber());
+        ((OrderListViewHolder)holder).getTvOrderTime().setText(Utils.getCreatedTime(mCoffeeOrders.get(position).getTime()));
+        ((OrderListViewHolder)holder).getTvOrderAccount().setText(mCoffeeOrders.get(position).getAccount());
+        ((OrderListViewHolder)holder).getTvOrderItems().setText(String.valueOf(mCoffeeOrders.get(position).getItemCount()));
+        ((OrderListViewHolder)holder).getTvTotalPrice().setText(String.valueOf(mCoffeeOrders.get(position).getPrice())+ " TWD");
+
+        setOrderStatusView(mCoffeeOrders.get(position).getStatus(), holder);
+    }
+
+    private void setOrderStatusView(int orderStatus, RecyclerView.ViewHolder holder) {
+        String statusString = "";
+        int statusTextColor = 0;
+
+        switch (orderStatus) {
+            case Constants.STATUS_PROCESS:
+                statusString = mContext.getString(R.string.order_status_process);
+                statusTextColor = R.color.Blue_600;
+                break;
+            case Constants.STATUS_COMPLETE:
+                statusString = mContext.getString(R.string.order_status_complete);
+                statusTextColor = R.color.Green_600;
+                break;
+            case Constants.STATUS_CANCEL:
+                statusString = mContext.getString(R.string.order_status_cancel);
+                statusTextColor = R.color.Red_600;
+                break;
+        }
+        ((OrderListViewHolder) holder).getTvOrderStatus().setText(statusString);
+        ((OrderListViewHolder) holder).getTvOrderStatus().setTextColor(mContext.getColor(statusTextColor));
     }
 
     @Override
     public int getItemCount() {
-        return 15;
+        return mCoffeeOrders.size();
     }
 
 
@@ -111,7 +142,7 @@ public class OrderListAdapter extends RecyclerView.Adapter {
 
 
     public void updateData(ArrayList<CoffeeOrder> coffeeOrders) {
-        Log.d(Constants.TAG_MAIN_COFFEE_ORDER_ADAPTER, "updateData, data count= " + coffeeOrders.size());
+        Log.d(Constants.TAG_ORDER_LIST_ADAPTER, "updateData, data count= " + coffeeOrders.size());
         mCoffeeOrders = new ArrayList<>(coffeeOrders);
         Collections.reverse(mCoffeeOrders);
         notifyDataSetChanged();
